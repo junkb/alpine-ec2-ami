@@ -126,3 +126,14 @@ temporary build-related artifacts.
 
 * Although it's possible to build "aarch64" (arm64) AMIs, they don't quite work
   yet.
+
+
+## Tags on AMIs
+
+* Profile (typically alpine)
+* Version (e.g. 3.10 or edge)
+* Release (e.g. 3.10.0 or edge)
+* Revision (e.g. r0 or unix timestamp)
+* EndOfLife (iso format)
+* DeleteDate (iso format)
+* BuildTime (Unix timestamp)
