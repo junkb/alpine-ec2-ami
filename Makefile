@@ -1,8 +1,9 @@
 # vim: ts=8 noet:
 
-ALL_SCRIPTS := $(wildcard scripts/*)
+NVME_SCRIPTS := $(subst scripts/,build/,$(wildcard scripts/nvme/*))
 CORE_PROFILES := $(wildcard profiles/*/*)
 TARGET_PROFILES := $(wildcard profiles/*.conf)
+
 PROFILE :=
 BUILD :=
 BUILDS := $(BUILD)
@@ -24,35 +25,40 @@ __check_defined = \
 
 .PHONY: amis prune release-readme clean
 
-amis: build build/packer.json build/profile/$(PROFILE) build/update-release.py build/make-amis.py
+amis: build/packer.json build/profile/$(PROFILE) build/update-release.py build/make-amis.py build/setup-ami $(NVME_SCRIPTS)
 	@:$(call check_defined, PROFILE, target profile name)
 	build/make-amis.py $(PROFILE) $(BUILDS)
 
-prune: build build/prune-amis.py
+prune: build/prune-amis.py
 	@:$(call check_defined, LEVEL, pruning level)
 	@:$(call check_defined, PROFILE, target profile name)
 	build/prune-amis.py $(LEVEL) $(PROFILE) $(BUILD)
 
-release-readme: build build/gen-release-readme.py
+release-readme: releases/README.md
+releases/README.md: build/gen-release-readme.py
 	@:$(call check_defined, PROFILE, target profile name)
 	@:$(call require_var, PROFILE)
 	build/gen-release-readme.py $(PROFILE)
 
-build: $(ALL_SCRIPTS)
+build/%: scripts/%
+	mkdir -p $$(dirname $(subst scripts/,build/,$<))
+	cp $< $@
+
+build:
+	python3 -m venv build
 	[ -d build/profile ] || mkdir -p build/profile
-	python3 -m venv build/.py3
-	build/.py3/bin/pip install pyhocon pyyaml boto3
-	(cd build; for i in $(ALL_SCRIPTS); do ln -sf ../$$i .; done)
+	build/bin/pip install -U pip pyhocon pyyaml boto3
 
-build/packer.json: build packer.conf
-	build/.py3/bin/pyhocon -i packer.conf -f json > build/packer.json
+build/packer.json: packer.conf build 
+	build/bin/pyhocon -i $< -f json > $@
 
-build/profile/$(PROFILE): build build/resolve-profile.py $(CORE_PROFILES) $(TARGET_PROFILES)
+.PHONY: build/profile/$(PROFILE)
+build/profile/$(PROFILE): build/resolve-profile.py $(CORE_PROFILES) $(TARGET_PROFILES)
 	@:$(call check_defined, PROFILE, target profile name)
 	build/resolve-profile.py $(PROFILE)
 
-%.py: %.py.in build
-	sed "s|@PYTHON@|#!`pwd`/build/.py3/bin/python|" $< > $@
+build/%.py: scripts/%.py.in build
+	sed "s|@PYTHON@|#!`pwd`/build/bin/python|" $< > $@
 	chmod +x $@
 
 clean:
