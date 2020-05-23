@@ -1,0 +1,134 @@
+edge-aarch64:
+  edge:
+    test-edge-aarch64-20200522201158:
+      description: Alpine Test edge aarch64 20200522201158
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200522201158'
+      end_of_life: '2020-05-23T20:11:58'
+      build_time: 1590178499
+      artifacts:
+        us-west-2: ami-058e48b5764100739
+    test-edge-aarch64-20200522221019:
+      description: Alpine Test edge aarch64 20200522221019
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200522221019'
+      end_of_life: '2020-05-23T22:10:19'
+      build_time: 1590185608
+      artifacts:
+        us-west-2: ami-09d251ad5bc230d73
+    test-edge-aarch64-20200522221337:
+      description: Alpine Test edge aarch64 20200522221337
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200522221337'
+      end_of_life: '2020-05-23T22:13:37'
+      build_time: 1590185806
+      artifacts:
+        us-west-2: ami-0a896faeac86a5d38
+    test-edge-aarch64-20200522222958:
+      description: Alpine Test edge aarch64 20200522222958
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200522222958'
+      end_of_life: '2020-05-23T22:29:58'
+      build_time: 1590186793
+      artifacts:
+        us-west-2: ami-0204686c895bd8c45
+    test-edge-aarch64-20200522223743:
+      description: Alpine Test edge aarch64 20200522223743
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200522223743'
+      end_of_life: '2020-05-23T22:37:43'
+      build_time: 1590187223
+      artifacts:
+        us-west-2: ami-02716e9ec836ef580
+    test-edge-aarch64-20200523003400:
+      description: Alpine Test edge aarch64 20200523003400
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200523003400'
+      end_of_life: '2020-05-24T00:34:00'
+      build_time: 1590194199
+      artifacts:
+        us-west-2: ami-0b255f9f0fb32e13b
+    test-edge-aarch64-20200523004734:
+      description: Alpine Test edge aarch64 20200523004734
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200523004734'
+      end_of_life: '2020-05-24T00:47:34'
+      build_time: 1590195002
+      artifacts:
+        us-west-2: ami-0ed204d618178057b
+    test-edge-aarch64-20200523005416:
+      description: Alpine Test edge aarch64 20200523005416
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200523005416'
+      end_of_life: '2020-05-24T00:54:16'
+      build_time: 1590195388
+      artifacts:
+        us-west-2: ami-01fed925c3ef7489f
+    test-edge-aarch64-20200523005634:
+      description: Alpine Test edge aarch64 20200523005634
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200523005634'
+      end_of_life: '2020-05-24T00:56:34'
+      build_time: 1590195589
+      artifacts:
+        us-west-2: ami-0599818011de8be3c
+    test-edge-aarch64-20200523010601:
+      description: Alpine Test edge aarch64 20200523010601
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200523010601'
+      end_of_life: '2020-05-24T01:06:01'
+      build_time: 1590196137
+      artifacts:
+        us-west-2: ami-06ddc6303856bc4c1
+    test-edge-aarch64-20200523011017:
+      description: Alpine Test edge aarch64 20200523011017
+      profile: test
+      profile_build: edge-aarch64
+      version: edge
+      release: edge
+      arch: aarch64
+      revision: '20200523011017'
+      end_of_life: '2020-05-24T01:10:17'
+      build_time: 1590196395
+      artifacts:
+        us-west-2: ami-0641c3b0a3a550a05

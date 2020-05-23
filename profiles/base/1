@@ -88,8 +88,10 @@ kernel_modules {
   sd-mod      = true
   usb-storage = true
   ext4        = true
+  nvme        = true
 }
 kernel_options {
-  "console=ttyS0" = true
-  "console=tty0"  = true
+  "nvme_core.io_timeout=4294967295" = true
+  "console=ttyS0,115200n8" = true
+  "console=tty0"           = true
 }

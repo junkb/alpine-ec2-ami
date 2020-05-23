@@ -59,18 +59,13 @@ fetch_apk_tools() {
 
 # mostly from Alpine's /sbin/setup-disk
 setup_partitions() {
-    start=1M    # TODO: do we really need to waste 1M?
-    line=
-
-    # create new partitions
-    (
-        for line in "$@"; do
-            case "$line" in
-            0M*) ;;
-            *) echo "$start,$line"; start= ;;
-            esac
-        done
-    ) | sfdisk --quiet --label dos "$DEVICE"
+    parted --script "$DEVICE" -- \
+        mklabel gpt \
+        mkpart primary fat32 0% 12M \
+        mkpart primary ext4 12M 100% \
+        set 1 boot on \
+        'name 1 "EFI System Partition"' \
+        name 2 Linux
 
     # we assume that the build host will create the new devices within 5s
     tries=5
@@ -89,7 +84,7 @@ make_filesystem() {
         # create a small EFI partition (remainder for root), and mount it
         setup_partitions '5M,EF' ',L'
         root_dev="${DEVICE}2"
-        mkfs.vfat -n EFI "${DEVICE}1"
+        mkfs.vfat "${DEVICE}1"
     fi
 
     mkfs.ext4 -O ^64bit -L / "$root_dev"
@@ -208,7 +203,7 @@ install_grub_efi() {
         --bootloader-id=alpine --boot-directory=/boot --no-nvram
 
     # fallback mode
-    install -D "$TARGET/boot/efi/EFI/alpine/grub$fwa.efi" "$TARGET/boot/efi/EFI/boot/$fwa.efi"
+    install -D "$TARGET/boot/efi/EFI/alpine/grub$fwa.efi" "$TARGET/boot/efi/EFI/BOOT/BOOTAA64.EFI"
 
     # add cmdline linux defaults to /etc/default/grub
     echo "GRUB_CMDLINE_LINUX_DEFAULT=\"modules=$KERNEL_MODS $KERNEL_OPTS\"" >> "$TARGET"/etc/default/grub
